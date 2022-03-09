@@ -3,20 +3,22 @@
     internal class Personne
     {
         Statut EtatDeVie;
-        String Prenom; 
+
+        //Hors du sujet : utile pour la console 
+        readonly String Prenom; 
 
         public Personne(String PrenomPersonne)
         {
             EtatDeVie = new Statut();
             Prenom = PrenomPersonne;
         }
-        public static String SePresente(Hero Sujet)
+        override public String ToString()
         {
-            return Sujet.Prenom;
+            return Prenom;
         }
         public static void TuerPersonne(Hero Sujet)
         {
-            Console.WriteLine(Personne.SePresente(Sujet) + " est décédé");
+            Console.WriteLine(Sujet.ToString() + " est décédé");
             Statut.StatutMort(Sujet.EtatDeVie);
         }
 

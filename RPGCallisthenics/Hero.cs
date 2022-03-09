@@ -24,18 +24,18 @@ namespace RPGCallisthenics
             bool EstEnEtatDAttaquer = Sante.EstVivant(Initiateur.Vie);
             if (EstTuable && EstEnEtatDAttaquer)
             {
-                Console.WriteLine(Personne.SePresente(Initiateur) + " Attaque ! Sa cible est :"+ Personne.SePresente(Cible));
+                Console.WriteLine(Initiateur.ToString() + " Attaque ! Sa cible est :"+ Cible.ToString());
                 Cible.Vie = VieEnMoins(Cible.Vie, Initiateur.Niveau);
-                Console.WriteLine(Personne.SePresente(Cible) + " perd " + NiveauDePuissance(Initiateur.Niveau) + " point de vie !") ;
+                Console.WriteLine(Cible.ToString() + " perd " + NiveauDePuissance(Initiateur.Niveau) + " point de vie !") ;
             }
             if (Sante.EstMort(Cible.Vie) && EstTuable)
             {
                 Personne.TuerPersonne(Cible);
                 Initiateur.Niveau = GainDeNiveau(Initiateur.Niveau);
-                Console.WriteLine(Personne.SePresente(Initiateur) + " Gagne en puissance !");
+                Console.WriteLine(Initiateur.ToString() + " Gagne en puissance !");
             }
         }
-        public static Sante VieEnMoins (Sante CibleVie,Level Montant)
+        private static Sante VieEnMoins (Sante CibleVie,Level Montant)
         {
             CibleVie.DamageDown(Montant);
             return CibleVie;
@@ -47,27 +47,31 @@ namespace RPGCallisthenics
             bool EstSoignable = Sante.EstSoignable(Cible.Vie) && !Sante.EstMort(Cible.Vie);
             if (EstSoignable)
             {
-                Console.WriteLine(Personne.SePresente(Initiateur) + " invoque un sort de soin ! Sa cible est :" + Personne.SePresente(Cible));
+                Console.WriteLine(Initiateur.ToString() + " invoque un sort de soin ! Sa cible est :" + Cible.ToString());
                 Cible.Vie = VieEnPlus(Cible.Vie, Initiateur.Niveau);
-                Console.WriteLine(Personne.SePresente(Cible) + " se sent revigoré !");
+                Console.WriteLine(Cible.ToString() + " se sent revigoré !");
             }
         }
-        public static Sante VieEnPlus(Sante CibleVie,Level Montant)
+        private static Sante VieEnPlus(Sante CibleVie,Level Montant)
         {
             CibleVie.HealUp(Montant);
             return CibleVie;
         }
-        public static Level GainDeNiveau(Level LevelHero)
+        private static Level GainDeNiveau(Level LevelHero)
         {
             LevelHero.LevelUP();
             return LevelHero;
         }
 
-        public static int NiveauDePuissance(Level NiveauHero)
+        private static int NiveauDePuissance(Level NiveauHero)
         {
             return NiveauHero.Valeur;
         }
-       
+        public bool Victoire()
+        {
+            return Sante.EstVivant(this.Vie);
+        }
 
+        
     }
 }

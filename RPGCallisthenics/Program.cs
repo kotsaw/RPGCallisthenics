@@ -7,6 +7,7 @@ namespace RPGCallisthenics
         
         static void Main(string[] args)
         {
+            bool FinPartie= false; 
             Hero hero1 = new Hero("Hercules");
             Hero ennemi1 = new Hero("Hades, roi des Enfers");
             Hero ennemi2 = new Hero("l'Infame Hydre");
@@ -28,7 +29,7 @@ namespace RPGCallisthenics
 
                 i++;
             }
-            while (j<500)
+            while (j<550)
             {
                 Hero.Attaque(ennemi2, hero1);
                 Hero.Attaque(hero1, ennemi2);
@@ -37,7 +38,15 @@ namespace RPGCallisthenics
             }
             while (true)
             {
-
+                if (hero1.Victoire() && !FinPartie)
+                {
+                    FinPartie = true;
+                    Console.WriteLine("           /\\                                                 /\\           ");
+                    Console.WriteLine(" _         )( ______________________   ______________________ )(         _ ");
+                    Console.WriteLine("(_)///////(**)______________________> <______________________(**)\\\\\\\\(_)");
+                    Console.WriteLine("           )(                                                 )(           ");
+                    Console.WriteLine("           \\/          "+ hero1.ToString() + " Remporte la partie !          \\/           ");
+                }
             }
 
 
